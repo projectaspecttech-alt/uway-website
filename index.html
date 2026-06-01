@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uway Information Technology (Thailand) Co., Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c8102e;
+    --dark-red: #9b0c22;
+    --navy: #0a1628;
+    --navy2: #0f2040;
+    --blue: #1a4fa0;
+    --sky: #2a7dd4;
+    --light: #f4f6fa;
+    --white: #ffffff;
+    --gray: #e8ecf2;
+    --text: #1a1a2e;
+    --text-light: #5a6a82;
+    --accent: #00c8e0;
+    --gold: #e8b84b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Sarabun', 'Noto Sans SC', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ======= LANGUAGE SYSTEM ======= */
+  .lang-th [data-en], .lang-th [data-zh] { display: none !important; }
+  .lang-th [data-th] { display: block; }
+  .lang-th span[data-th] { display: inline; }
+
+  .lang-en [data-th], .lang-en [data-zh] { display: none !important; }
+  .lang-en [data-en] { display: block; }
+  .lang-en span[data-en] { display: inline; }
+
+  .lang-zh [data-th], .lang-zh [data-en] { display: none !important; }
+  .lang-zh [data-zh] { display: block; }
+  .lang-zh span[data-zh] { display: inline; }
+
+  [data-th], [data-en], [data-zh] { display: none; }
+
+  /* ======= NAVBAR ======= */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--red);
+    padding: 0 40px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--sky), var(--accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .nav-brand {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .nav-brand span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .lang-switcher {
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Sarabun', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  /* ======= HERO ======= */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 68px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(26,79,160,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 15% 80%, rgba(200,16,46,0.18) 0%, transparent 60%),
+      linear-gradient(160deg, #0a1628 0%, #0f2040 60%, #0d1c38 100%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(42,125,212,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,125,212,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.4);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ff6b7a;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #ff6b7a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .hero-title .accent { color: var(--accent); }
+  .hero-title .red { color: var(--red); }
+
+  .hero-subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.25s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,16,46,0.4);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--accent);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.25s;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,200,224,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Hero Right */
+  .hero-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .hero-stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 24px 20px;
+    transition: all 0.3s;
+  }
+
+  .hero-stat-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(0,200,224,0.3);
+    transform: translateY(-4px);
+  }
+
+  .hero-stat-card.span2 { grid-column: span 2; }
+
+  .stat-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .stat-number {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+  }
+
+  /* ======= SECTION COMMON ======= */
+  section {
+    padding: 100px 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  /* ======= ABOUT ======= */
+  #about {
+    background: var(--light);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-img-bg {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-img-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect width="60" height="60" fill="none"/><path d="M0 60 L60 0" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>') repeat;
+  }
+
+  .about-logo-large {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.1);
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    letter-spacing: -4px;
+  }
+
+  .about-float-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--red);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(200,16,46,0.4);
+  }
+
+  .about-float-card .big { font-size: 32px; font-weight: 700; font-family: 'Rajdhani', sans-serif; }
+  .about-float-card .small { font-size: 12px; opacity: 0.85; }
+
+  .cert-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .cert-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1.5px solid var(--gray);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .cert-tag::before {
+    content: '✓';
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* ======= SERVICES ======= */
+  #services {
+    background: var(--white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 1.5px solid var(--gray);
+    border-radius: 16px;
+    padding: 36px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: rgba(200,16,46,0.2);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .service-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .service-tags span {
+    background: var(--light);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* ======= PROJECTS ======= */
+  #projects {
+    background: var(--navy);
+    color: white;
+  }
+
+  #projects .section-title { color: white; }
+  #projects .section-desc { color: rgba(255,255,255,0.55); }
+
+  .projects-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 40px;
+    background: rgba(255,255,255,0.06);
+    padding: 6px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+
+  .tab-btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Sarabun', sans-serif;
+  }
+
+  .tab-btn.active {
+    background: var(--red);
+    color: white;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .project-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+    transition: all 0.25s;
+  }
+
+  .project-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(0,200,224,0.25);
+    transform: translateX(6px);
+  }
+
+  .project-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.1);
+    line-height: 1;
+    min-width: 50px;
+  }
+
+  .project-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .project-tags span {
+    background: rgba(200,16,46,0.2);
+    border: 1px solid rgba(200,16,46,0.3);
+    color: #ff8fa0;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .case-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.25s;
+  }
+
+  .case-card:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-4px);
+  }
+
+  .case-company {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .case-list {
+    list-style: none;
+  }
+
+  .case-list li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .case-list li::before {
+    content: '▸';
+    color: var(--red);
+    font-size: 10px;
+  }
+
+  /* ======= CERTIFICATIONS ======= */
+  #certifications {
+    background: var(--light);
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .cert-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1.5px solid var(--gray);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .cert-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 8px 32px rgba(200,16,46,0.12);
+    transform: translateY(-4px);
+  }
+
+  .cert-card-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .cert-card-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .cert-card-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ======= CUSTOMERS ======= */
+  #customers {
+    background: var(--white);
+  }
+
+  .customers-marquee-wrap {
+    overflow: hidden;
+    margin: 0 -60px;
+    padding: 20px 0;
+  }
+
+  .customers-marquee {
+    display: flex;
+    gap: 24px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .customer-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--light);
+    border: 1.5px solid var(--gray);
+    border-radius: 8px;
+    padding: 12px 24px;
+    white-space: nowrap;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+
+  .customer-chip:hover {
+    border-color: var(--red);
+    background: white;
+    box-shadow: 0 4px 16px rgba(200,16,46,0.1);
+  }
+
+  .customer-chip .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+
+  .customers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .customer-logo-card {
+    background: var(--light);
+    border: 1.5px solid var(--gray);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .customer-logo-card:hover {
+    border-color: var(--red);
+    background: white;
+    transform: scale(1.03);
+  }
+
+  .customer-logo-card .name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ======= CONTACT / FOOTER ======= */
+  #contact {
+    background: var(--navy);
+    color: white;
+    padding: 80px 0 0;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .contact-info h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .contact-info p {
+    color: rgba(255,255,255,0.55);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+  }
+
+  .contact-item-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(200,16,46,0.2);
+    border: 1px solid rgba(200,16,46,0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Sarabun', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-group select option { background: var(--navy2); }
+
+  .footer-bottom {
+    padding: 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-bottom p {
+    color: rgba(255,255,255,0.35);
+    font-size: 13px;
+  }
+
+  .footer-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  /* ======= SCROLL ANIMATIONS ======= */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ======= MOBILE NAV ======= */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .hero-content {
+      grid-template-columns: 1fr;
+      padding: 60px 30px;
+      gap: 40px;
+    }
+
+    .hero-title { font-size: 40px; }
+
+    .about-grid,
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .customers-grid { grid-template-columns: repeat(2, 1fr); }
+    .case-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .container { padding: 0 24px; }
+    .section-title { font-size: 32px; }
+  }
+
+  /* Sticky nav active */
+  nav.scrolled {
+    background: rgba(10,22,40,1);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  /* about visual icon */
+  .about-icons-visual {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+    padding: 32px;
+    width: 100%;
+  }
+
+  .vi-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 18px 10px;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .vi-item p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body class="lang-th">
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">U</div>
+    <div class="nav-brand">U<span>way</span></div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">
+      <span data-th>เกี่ยวกับเรา</span>
+      <span data-en>About</span>
+      <span data-zh>关于我们</span>
+    </a></li>
+    <li><a href="#services">
+      <span data-th>บริการ</span>
+      <span data-en>Services</span>
+      <span data-zh>业务范围</span>
+    </a></li>
+    <li><a href="#projects">
+      <span data-th>ผลงาน</span>
+      <span data-en>Projects</span>
+      <span data-zh>项目案例</span>
+    </a></li>
+    <li><a href="#certifications">
+      <span data-th>ใบรับรอง</span>
+      <span data-en>Certifications</span>
+      <span data-zh>资质认证</span>
+    </a></li>
+    <li><a href="#customers">
+      <span data-th>ลูกค้า</span>
+      <span data-en>Customers</span>
+      <span data-zh>主要客户</span>
+    </a></li>
+    <li><a href="#contact">
+      <span data-th>ติดต่อ</span>
+      <span data-en>Contact</span>
+      <span data-zh>联系我们</span>
+    </a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:20px;">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('th')">TH</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span data-th>Thailand IT Solutions</span>
+        <span data-en>Thailand IT Solutions</span>
+        <span data-zh>泰国IT解决方案</span>
+      </div>
+
+      <h1 class="hero-title">
+        <div data-th>Uway<br><span class="accent">Information</span><br><span class="red">Technology</span></div>
+        <div data-en>Uway<br><span class="accent">Information</span><br><span class="red">Technology</span></div>
+        <div data-zh>Uway<br><span class="accent">信息技术</span><br><span class="red">（泰国）</span></div>
+      </h1>
+
+      <p class="hero-subtitle">
+        <span data-th>ผู้ให้บริการด้านไอทีชั้นนำในประเทศไทย</span>
+        <span data-en>Thailand's Premier IT Service Provider</span>
+        <span data-zh>泰国一流IT服务提供商</span>
+      </p>
+
+      <p class="hero-desc">
+        <span data-th>เราให้บริการครบวงจรด้านความปลอดภัยเครือข่าย การติดตั้งเซิร์ฟเวอร์ การจัดการข้อมูล สายสัญญาณ ระบบเสียง ระบบตรวจสอบ และการผสานระบบ พร้อมทีมผู้เชี่ยวชาญที่ผ่านการรับรองระดับสากล</span>
+        <span data-en>Comprehensive IT services including network security, server deployment, data management, cabling, voice systems, monitoring, and system integration. Backed by internationally certified experts.</span>
+        <span data-zh>专注于网络安全、服务器部署、数据管理、布线、语音、监控和系统集成，提供一流解决方案和客户服务外包。</span>
+      </p>
+
+      <div class="hero-cta">
+        <a href="#services" class="btn-primary">
+          <span data-th>ดูบริการของเรา</span>
+          <span data-en>Our Services</span>
+          <span data-zh>了解业务</span>
+          →
+        </a>
+        <a href="#contact" class="btn-outline">
+          <span data-th>ติดต่อเรา</span>
+          <span data-en>Contact Us</span>
+          <span data-zh>联系我们</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stat-card">
+        <div class="stat-icon">🛡️</div>
+        <div class="stat-number">ISO</div>
+        <div class="stat-label">
+          <span data-th>IEC 27001:2022 รับรอง</span>
+          <span data-en>IEC 27001:2022 Certified</span>
+          <span data-zh>IEC 27001:2022认证</span>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">🤝</div>
+        <div class="stat-number">CCIE</div>
+        <div class="stat-label">
+          <span data-th>วิศวกรรับรอง Cisco</span>
+          <span data-en>Cisco Certified Engineers</span>
+          <span data-zh>思科认证工程师</span>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-number">20+</div>
+        <div class="stat-label">
+          <span data-th>ลูกค้าองค์กรชั้นนำ</span>
+          <span data-en>Enterprise Clients</span>
+          <span data-zh>企业客户</span>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number">6+</div>
+        <div class="stat-label">
+          <span data-th>โซลูชันหลัก</span>
+          <span data-en>Core Solutions</span>
+          <span data-zh>核心解决方案</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="about-img-bg">
+          <div class="about-icons-visual">
+            <div class="vi-item">🌐<p>Network</p></div>
+            <div class="vi-item">🛡️<p>Security</p></div>
+            <div class="vi-item">💾<p>Server</p></div>
+            <div class="vi-item">☁️<p>Cloud</p></div>
+            <div class="vi-item">📡<p>Wireless</p></div>
+            <div class="vi-item">🔗<p>SD-WAN</p></div>
+          </div>
+          <div class="about-logo-large">UWAY</div>
+        </div>
+        <div class="about-float-card">
+          <div class="big">Win-Win</div>
+          <div class="small">
+            <span data-th>ความร่วมมือที่เติบโตไปด้วยกัน</span>
+            <span data-en>Partnership & Cooperation</span>
+            <span data-zh>合作共赢 · 共创未来</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up" style="transition-delay:0.15s">
+        <div class="section-tag">
+          <span data-th>เกี่ยวกับเรา</span>
+          <span data-en>About Us</span>
+          <span data-zh>关于企业</span>
+        </div>
+        <h2 class="section-title">
+          <span data-th>Uway Information Technology<br>(Thailand) Co., Ltd.</span>
+          <span data-en>Uway Information Technology<br>(Thailand) Co., Ltd.</span>
+          <span data-zh>Uway信息技术<br>（泰国）有限公司</span>
+        </h2>
+        <p class="section-desc">
+          <span data-th>บริษัท Uway Information Technology (Thailand) Co., Ltd. เป็นผู้ให้บริการที่มุ่งเน้นด้านความปลอดภัยเครือข่าย การปรับใช้เซิร์ฟเวอร์ ข้อมูล สายสัญญาณ เสียง การตรวจสอบ และการผสานระบบ ด้วยการให้บริการโซลูชันชั้นนำและบริการ Outsource แบบครบวงจร เรามุ่งมั่นส่งมอบผลิตภัณฑ์ เทคโนโลยี และบริการที่ดีที่สุดให้แก่ลูกค้าเสมอ</span>
+          <span data-en>Uway Information Technology (Thailand) Co., Ltd. is a service provider focusing on network security, server deployment, data, cabling, voice, monitoring and system integration. We deliver first-class solutions and customer service outsourcing, building expert-based technology and service teams to meet diverse enterprise needs.</span>
+          <span data-zh>Uway信息技术（泰国）有限公司，是一家专注于网络安全、服务器部署、数据、布线、语音、监控和系统集成的服务提供商，全方位提供一流解决方案和客户服务外包服务。公司始终以专业化方向发展，打造专家型技术、销售和服务团队。</span>
+        </p>
+
+        <div class="cert-strip">
+          <span class="cert-tag">ISO/IEC 27001:2022</span>
+          <span class="cert-tag">Cisco Partner</span>
+          <span class="cert-tag">DELL Technologies</span>
+          <span class="cert-tag">Huawei HCIE</span>
+          <span class="cert-tag">VMware VCP</span>
+          <span class="cert-tag">Red Hat RHCE</span>
+          <span class="cert-tag">H3C HCIE</span>
+          <span class="cert-tag">Ruijie RCTE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">
+        <span data-th>บริการของเรา</span>
+        <span data-en>Our Services</span>
+        <span data-zh>业务范围</span>
+      </div>
+      <h2 class="section-title">
+        <span data-th>โซลูชันไอทีครบวงจร</span>
+        <span data-en>Comprehensive IT Solutions</span>
+        <span data-zh>核心业务解决方案</span>
+      </h2>
+      <p class="section-desc">
+        <span data-th>เราให้บริการโซลูชันเทคโนโลยีสารสนเทศที่หลากหลาย ครอบคลุมทุกความต้องการขององค์กรยุคใหม่</span>
+        <span data-en>We provide diverse IT solutions covering all modern enterprise needs with specialized expertise and certified professionals.</span>
+        <span data-zh>我们提供多样化的IT解决方案，满足现代企业的所有技术需求。</span>
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card fade-up">
+        <div class="service-icon">📡</div>
+        <div class="service-title">
+          <span data-th>ระบบไร้สาย</span>
+          <span data-en>Wireless Solution</span>
+          <span data-zh>无线网络部署</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>ระบบบริหารจัดการ AP แบบรวมศูนย์ผ่าน Web รองรับการตรวจสอบสิทธิ์แบบหลายชั้น MAC+KEY การจัดการสัญญาณวิทยุแบบเรียลไทม์ และการโรมมิ่งอย่างราบรื่น</span>
+          <span data-en>Centralized AP management via Web, multi-layer authentication (MAC+KEY), real-time RF management with dynamic power optimization, and seamless roaming across access points.</span>
+          <span data-zh>Web统一管理AP，多重认证机制MAC+KEY，实时射频管理动态优化功率，无缝漫游确保用户无感知切换。</span>
+        </p>
+        <div class="service-tags">
+          <span>WLC</span><span>Seamless Roaming</span><span>RF Management</span>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card fade-up" style="transition-delay:0.1s">
+        <div class="service-icon">💻</div>
+        <div class="service-title">
+          <span data-th>การจำลองเสมือนเซิร์ฟเวอร์</span>
+          <span data-en>Server Virtualization</span>
+          <span data-zh>服务器虚拟化</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>ลดต้นทุนฮาร์ดแวร์และพลังงาน รองรับการสำรองข้อมูลในกรณีฉุกเฉิน การกู้คืนระบบ และการจัดสรรทรัพยากรที่ยืดหยุ่น พร้อม VMware ESX/ESXi</span>
+          <span data-en>Reduce hardware and energy costs, ensure business continuity with disaster recovery, redundant critical systems, and flexible resource allocation using VMware ESX/ESXi.</span>
+          <span data-zh>降低硬件成本和电力成本，确保业务连续性，灾难恢复，集中策略管理，灵活资源分配。</span>
+        </p>
+        <div class="service-tags">
+          <span>VMware</span><span>ESXi</span><span>HA/DR</span>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card fade-up" style="transition-delay:0.2s">
+        <div class="service-icon">🛡️</div>
+        <div class="service-title">
+          <span data-th>ความปลอดภัยเครือข่าย</span>
+          <span data-en>Network Security</span>
+          <span data-zh>网络安全管理</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>กรอง URL ที่เป็นอันตราย บริหารจัดการแบนด์วิดท์ ควบคุมแอปพลิเคชัน และจัดสรรทรัพยากรเครือข่ายตามประเภทธุรกิจ</span>
+          <span data-en>URL filtering to block malicious links, bandwidth management for business priority, application control, and network resource allocation by business type.</span>
+          <span data-zh>URL过滤、带宽管理、应用程序管理、网络资源管理，全面保障企业网络安全。</span>
+        </p>
+        <div class="service-tags">
+          <span>Firewall</span><span>IPS/IDS</span><span>URL Filter</span>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card fade-up" style="transition-delay:0.1s">
+        <div class="service-icon">🔒</div>
+        <div class="service-title">
+          <span data-th>DMVPN หลายสาขา</span>
+          <span data-en>DMVPN Multi-site</span>
+          <span data-zh>DMVPN多站点VPN</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>เชื่อมต่อสาขาหลายแห่งกับสำนักงานใหญ่ผ่าน DMVPN รองรับการสำรองสายคู่เพื่อความต่อเนื่องของธุรกิจ และการวางแผน IP แบบรวมศูนย์</span>
+          <span data-en>Multi-branch interconnection with headquarters via DMVPN, dual-line backup for high availability, unified IP addressing, centralized AD/AV server management.</span>
+          <span data-zh>实现分支与总部、分支与分支互联，双线路DMVPN备份，统一IP规划，总部集中AD/AV管理。</span>
+        </p>
+        <div class="service-tags">
+          <span>DMVPN</span><span>Dual-link</span><span>BGP/OSPF</span>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card fade-up" style="transition-delay:0.2s">
+        <div class="service-icon">☁️</div>
+        <div class="service-title">
+          <span data-th>โซลูชันคลาวด์</span>
+          <span data-en>Cloud Solution</span>
+          <span data-zh>云服务解决方案</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>ช่วยองค์กรย้ายบริการไปยัง Cloud พร้อม VPN Tunnel รักษาความปลอดภัยการสื่อสาร รองรับ Web, ERP, AD+Exchange, SharePoint, WeChat Platform บน AWS</span>
+          <span data-en>Migrate enterprise services to cloud with secure VPN tunnels between endpoints and virtual firewalls. Supports Web, ERP, AD+Exchange, SharePoint on AWS infrastructure.</span>
+          <span data-zh>企业云迁移，通过VPN隧道确保安全访问，支持Web服务、ERP、AD+Exchange、SharePoint、微信公众平台。</span>
+        </p>
+        <div class="service-tags">
+          <span>AWS</span><span>VPN</span><span>ERP</span>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card fade-up" style="transition-delay:0.3s">
+        <div class="service-icon">🌍</div>
+        <div class="service-title">
+          <span data-th>SD-WAN</span>
+          <span data-en>SD-WAN</span>
+          <span data-zh>SD-WAN软件定义广域网</span>
+        </div>
+        <p class="service-desc">
+          <span data-th>เหมาะสำหรับการส่งข้อมูลแบบเรียลไทม์ วิดีโอ/เสียง รองรับการปรับใช้บนฮาร์ดแวร์จริง เสมือน หรือ Public Cloud เพิ่มความเร็วการเชื่อมต่อสาขาและ SaaS</span>
+          <span data-en>Ideal for real-time data transmission, video/audio streaming. Supports physical, virtualized, and public cloud deployment. Accelerates branch connectivity and SaaS access.</span>
+          <span data-zh>适用于实时数据传输、视频/音频内容，支持物理/虚拟化/公有云部署，加速总部分支和SaaS连接。</span>
+        </p>
+        <div class="service-tags">
+          <span>SD-WAN</span><span>SaaS</span><span>Multi-cloud</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag" style="background:var(--accent);color:var(--navy)">
+        <span data-th>ผลงาน</span>
+        <span data-en>Project Cases</span>
+        <span data-zh>项目案例</span>
+      </div>
+      <h2 class="section-title">
+        <span data-th>ผลงานและโปรเจกต์</span>
+        <span data-en>Our Project Experience</span>
+        <span data-zh>部分项目展示</span>
+      </h2>
+      <p class="section-desc">
+        <span data-th>ประสบการณ์จริงในการดำเนินโครงการไอทีครบวงจรสำหรับองค์กรชั้นนำในประเทศไทย</span>
+        <span data-en>Real-world experience delivering comprehensive IT projects for leading enterprises in Thailand.</span>
+        <span data-zh>为泰国各大企业提供全面IT解决方案的实际项目经验。</span>
+      </p>
+    </div>
+
+    <div class="projects-tabs fade-up">
+      <button class="tab-btn active" onclick="showTab('network')">
+        <span data-th>โครงการเครือข่าย</span>
+        <span data-en>Network Projects</span>
+        <span data-zh>网络项目</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('server')">
+        <span data-th>โครงการเซิร์ฟเวอร์</span>
+        <span data-en>Server Projects</span>
+        <span data-zh>服务器项目</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('integration')">
+        <span data-th>ระบบบูรณาการ</span>
+        <span data-en>System Integration</span>
+        <span data-zh>系统集成</span>
+      </button>
+    </div>
+
+    <!-- Network Tab -->
+    <div id="tab-network" class="tab-content active fade-up">
+      <div class="project-item">
+        <div class="project-num">01</div>
+        <div>
+          <div class="project-title">
+            <span data-th>การสำรองสวิตช์ L3 ด้วย VSS</span>
+            <span data-en>L3 Switch Redundancy via VSS</span>
+            <span data-zh>L3交换机VSS冗余升级</span>
+          </div>
+          <p class="project-desc">
+            <span data-th>อัปเกรดจาก HSRP (สำรองแบบ Active-Standby, แบนด์วิดท์ 2GB) เป็น Cisco 6500 VSS ที่ทำให้สวิตช์ทำงานแบบ Active-Active แบนด์วิดท์เพิ่มเป็น 2TB และเวลาสลับเหลือ ~1 วินาที</span>
+            <span data-en>Upgraded from HSRP Active-Standby (2GB bandwidth, 10-hour failover) to Cisco 6500 VSS with Active-Active processing, 2TB bandwidth, sub-1-second failover, and single IP management.</span>
+            <span data-zh>从HSRP主备模式（2GB带宽，切换10小时）升级为Cisco 6500 VSS，实现Active-Active处理，带宽提升至2TB，切换时间约1秒。</span>
+          </p>
+          <div class="project-tags">
+            <span>Cisco 6500</span><span>VSS</span><span>Active-Active</span><span>2TB Bandwidth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-num">02</div>
+        <div>
+          <div class="project-title">
+            <span data-th>การสำรองลิงก์ L3-L2 ด้วย MEC</span>
+            <span data-en>L3-L2 Link Redundancy via MEC</span>
+            <span data-zh>L3-L2链路MEC冗余</span>
+          </div>
+          <p class="project-desc">
+            <span data-th>เปลี่ยนจาก STP (Active-Standby, 1GB, เวลาสลับ 10 วินาที) มาใช้ MEC ระหว่าง L2 และ L3 เพิ่มแบนด์วิดท์เป็น 2GB และลดเวลาสลับเหลือน้อยกว่า 1 วินาที</span>
+            <span data-en>Replaced STP-based Active-Standby (1GB, 10-second failover) with MEC between L2 and L3 switches, achieving Active-Active links with 2GB bandwidth and under 1-second failover.</span>
+            <span data-zh>将STP主备链路（1GB带宽，切换10秒）替换为MEC，实现L2-L3 Active-Active，带宽增至2GB，切换时间小于1秒。</span>
+          </p>
+          <div class="project-tags">
+            <span>MEC</span><span>STP→MEC</span><span>Sub-1s Failover</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Server Tab -->
+    <div id="tab-server" class="tab-content">
+      <div class="project-item">
+        <div class="project-num">01</div>
+        <div>
+          <div class="project-title">
+            <span data-th>ระบบ Server Virtualization ครบวงจร</span>
+            <span data-en>Full Server Virtualization Deployment</span>
+            <span data-zh>服务器虚拟化整体部署</span>
+          </div>
+          <p class="project-desc">
+            <span data-th>ติดตั้ง ESX Server 3 เครื่อง (Dell R710), Storage PS6000XV พร้อม iSCSI LAN, Management LAN (HeartBeat/vMotion/Backup) รวมการจัดการเซิร์ฟเวอร์เมล HR SQL ตรวจสอบ และ File Server ในระบบเดียว</span>
+            <span data-en>Deployed 3 Dell R710 ESX Servers, Storage PS6000XV with iSCSI LAN, Management LAN (HeartBeat/vMotion/Backup). Consolidated Mail, HR, SQL, Monitor, and File servers onto virtualized infrastructure.</span>
+            <span data-zh>部署3台Dell R710 ESX服务器，Storage PS6000XV iSCSI存储，实现邮件、HR、SQL、监控、文件服务器虚拟化整合，降低运维成本。</span>
+          </p>
+          <div class="project-tags">
+            <span>Dell R710</span><span>VMware ESXi</span><span>iSCSI</span><span>vMotion</span><span>DR Backup</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Integration Tab -->
+    <div id="tab-integration" class="tab-content">
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-company">SYKC Circuit (Thailand) Co., Ltd.</div>
+          <ul class="case-list">
+            <li><span data-th>ระบบเพลงพื้นหลัง</span><span data-en>Background Music System</span><span data-zh>背景音乐系统</span></li>
+            <li><span data-th>ระบบตรวจสอบ CCTV</span><span data-en>Monitoring System</span><span data-zh>监控系统</span></li>
+            <li><span data-th>ระบบห้อง IT</span><span data-en>IT Room System</span><span data-zh>IT机房系统</span></li>
+            <li><span data-th>เครือข่ายและเซิร์ฟเวอร์</span><span data-en>Network & Server Systems</span><span data-zh>网络和服务器系统</span></li>
+            <li><span data-th>จอ LED ขนาดใหญ่</span><span data-en>Large-scale LED Display</span><span data-zh>大型LED显示系统</span></li>
+          </ul>
+        </div>
+
+        <div class="case-card">
+          <div class="case-company">Shanghai Electric Drive (Thailand)</div>
+          <ul class="case-list">
+            <li><span data-th>ระบบตรวจสอบ</span><span data-en>Monitoring System</span><span data-zh>监控系统</span></li>
+            <li><span data-th>เครือข่าย WiFi และเซิร์ฟเวอร์</span><span data-en>Network (WIFI) & Server</span><span data-zh>网络(WIFI)、服务器系统</span></li>
+            <li><span data-th>ระบบความปลอดภัยเครือข่าย</span><span data-en>Network Security System</span><span data-zh>网络安全系统</span></li>
+            <li><span data-th>ระบบห้อง IT</span><span data-en>IT Room Project</span><span data-zh>IT机房项目</span></li>
+            <li><span data-th>ระบบควบคุมการเข้าออก</span><span data-en>Access Control System</span><span data-zh>门禁系统</span></li>
+          </ul>
+        </div>
+
+        <div class="case-card">
+          <div class="case-company">GULFWELL TECHNOLOGY (Thailand)</div>
+          <ul class="case-list">
+            <li><span data-th>ระบบตรวจสอบ</span><span data-en>Monitoring System</span><span data-zh>监控系统</span></li>
+            <li><span data-th>เครือข่าย WiFi และเซิร์ฟเวอร์</span><span data-en>Network (WIFI) & Server</span><span data-zh>网络(WIFI)、服务器系统</span></li>
+            <li><span data-th>ระบบความปลอดภัยเครือข่าย</span><span data-en>Network Security System</span><span data-zh>网络安全系统</span></li>
+            <li><span data-th>ระบบห้อง IT</span><span data-en>IT Room Project</span><span data-zh>IT机房项目</span></li>
+            <li><span data-th>ระบบควบคุมการเข้าออก</span><span data-en>Access Control System</span><span data-zh>门禁系统</span></li>
+          </ul>
+        </div>
+
+        <div class="case-card">
+          <div class="case-company">THK Precision Industry Co., Ltd.</div>
+          <ul class="case-list">
+            <li><span data-th>ระบบบัตรอเนกประสงค์</span><span data-en>All-purpose Card System</span><span data-zh>全能卡系统</span></li>
+            <li><span data-th>ระบบตรวจสอบ</span><span data-en>Monitoring System</span><span data-zh>监控系统</span></li>
+            <li><span data-th>ระบบห้อง IT</span><span data-en>IT Room System</span><span data-zh>IT机房系统</span></li>
+            <li><span data-th>การเดินสายสัญญาณ</span><span data-en>Integrated Wiring</span><span data-zh>综合布线</span></li>
+            <li><span data-th>โครงการเครือข่ายไร้สาย</span><span data-en>Wireless Network Project</span><span data-zh>无线网络项目</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CERTIFICATIONS ===== -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center;margin-bottom:48px">
+      <div class="section-tag" style="margin:0 auto 16px">
+        <span data-th>ใบรับรอง</span>
+        <span data-en>Certifications</span>
+        <span data-zh>资质认证</span>
+      </div>
+      <h2 class="section-title" style="text-align:center">
+        <span data-th>ใบรับรองและคุณวุฒิ</span>
+        <span data-en>Certifications & Qualifications</span>
+        <span data-zh>公司及人员资质</span>
+      </h2>
+      <p class="section-desc" style="margin:0 auto;text-align:center">
+        <span data-th>ทีมงานผ่านการรับรองมาตรฐานสากลจากองค์กรชั้นนำระดับโลก</span>
+        <span data-en>Our team holds international certifications from world-leading technology organizations.</span>
+        <span data-zh>我们的团队持有来自全球顶级技术机构的国际认证。</span>
+      </p>
+    </div>
+
+    <div class="cert-grid">
+      <div class="cert-card fade-up">
+        <div class="cert-card-icon">🔒</div>
+        <div class="cert-card-name">ISO/IEC 27001:2022</div>
+        <p class="cert-card-desc">
+          <span data-th>ระบบบริหารจัดการความมั่นคงข้อมูล</span>
+          <span data-en>Information Security Management System</span>
+          <span data-zh>信息安全管理体系认证</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.1s">
+        <div class="cert-card-icon">🌐</div>
+        <div class="cert-card-name">Cisco CCIE/CCNP</div>
+        <p class="cert-card-desc">
+          <span data-th>วิศวกรเครือข่าย Cisco ระดับสูง</span>
+          <span data-en>Cisco Certified Internetwork Expert</span>
+          <span data-zh>思科认证网际互联专家</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.2s">
+        <div class="cert-card-icon">🖥️</div>
+        <div class="cert-card-name">VMware VCP</div>
+        <p class="cert-card-desc">
+          <span data-th>VMware Certified Professional - Data Center</span>
+          <span data-en>VMware Certified Professional - Data Center Virtualization 2024</span>
+          <span data-zh>VMware数据中心虚拟化认证专家 2024</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.3s">
+        <div class="cert-card-icon">☁️</div>
+        <div class="cert-card-name">Huawei HCIE</div>
+        <p class="cert-card-desc">
+          <span data-th>Huawei Certified ICT Expert - Datacom</span>
+          <span data-en>Huawei Certified ICT Expert - Datacom</span>
+          <span data-zh>华为认证ICT专家 - 数据通信</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="cert-card-icon">🔴</div>
+        <div class="cert-card-name">Red Hat RHCE</div>
+        <p class="cert-card-desc">
+          <span data-th>Red Hat Certified Engineer - Enterprise Linux 6</span>
+          <span data-en>Red Hat Certified Engineer - Enterprise Linux</span>
+          <span data-zh>红帽认证工程师 - 企业Linux</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.1s">
+        <div class="cert-card-icon">🏢</div>
+        <div class="cert-card-name">H3C HCIE-RS+</div>
+        <p class="cert-card-desc">
+          <span data-th>H3C Certified Internetwork Expert - Routing & Switching Plus</span>
+          <span data-en>H3C Certified Internetwork Expert R&S Plus</span>
+          <span data-zh>H3C认证网络互联专家（路由交换）</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.2s">
+        <div class="cert-card-icon">📋</div>
+        <div class="cert-card-name">PMP</div>
+        <p class="cert-card-desc">
+          <span data-th>Project Management Professional - PMI</span>
+          <span data-en>Project Management Professional - PMI Certified</span>
+          <span data-zh>项目管理专业人员 - PMI认证</span>
+        </p>
+      </div>
+
+      <div class="cert-card fade-up" style="transition-delay:0.3s">
+        <div class="cert-card-icon">⚡</div>
+        <div class="cert-card-name">DELL Partner</div>
+        <p class="cert-card-desc">
+          <span data-th>DELL Technologies Authorized Partner</span>
+          <span data-en>DELL Technologies Authorized Partner 2025</span>
+          <span data-zh>戴尔技术授权合作伙伴 2025</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CUSTOMERS ===== -->
+<section id="customers">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-tag" style="margin:0 auto 16px">
+        <span data-th>ลูกค้าของเรา</span>
+        <span data-en>Our Customers</span>
+        <span data-zh>主要客户</span>
+      </div>
+      <h2 class="section-title" style="text-align:center">
+        <span data-th>ลูกค้าชั้นนำที่ไว้วางใจเรา</span>
+        <span data-en>Trusted by Leading Enterprises</span>
+        <span data-zh>众多知名企业的信赖之选</span>
+      </h2>
+      <p class="section-desc" style="margin:0 auto;text-align:center">
+        <span data-th>เราให้บริการแก่บริษัทชั้นนำทั้งในระดับญี่ปุ่น จีน และนานาชาติที่ดำเนินงานในประเทศไทย</span>
+        <span data-en>Serving leading Japanese, Chinese, and international corporations operating in Thailand.</span>
+        <span data-zh>为泰国众多日资、中资及国际企业提供专业IT服务。</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="customers-marquee-wrap">
+    <div class="customers-marquee">
+      <div class="customer-chip"><span class="dot"></span>SYKC Circuit</div>
+      <div class="customer-chip"><span class="dot"></span>MUSASHI</div>
+      <div class="customer-chip"><span class="dot"></span>FUJITSU</div>
+      <div class="customer-chip"><span class="dot"></span>KDDI</div>
+      <div class="customer-chip"><span class="dot"></span>YOKOHAMA</div>
+      <div class="customer-chip"><span class="dot"></span>MINTH GROUP</div>
+      <div class="customer-chip"><span class="dot"></span>COMPAL</div>
+      <div class="customer-chip"><span class="dot"></span>DSSC</div>
+      <div class="customer-chip"><span class="dot"></span>Signcomplex</div>
+      <div class="customer-chip"><span class="dot"></span>LEDUX</div>
+      <div class="customer-chip"><span class="dot"></span>Midea</div>
+      <div class="customer-chip"><span class="dot"></span>GRIPM</div>
+      <div class="customer-chip"><span class="dot"></span>Asia Aroma</div>
+      <div class="customer-chip"><span class="dot"></span>FIRST</div>
+      <div class="customer-chip"><span class="dot"></span>THK Precision</div>
+      <div class="customer-chip"><span class="dot"></span>Gulfwell Tech</div>
+      <!-- duplicate for seamless -->
+      <div class="customer-chip"><span class="dot"></span>SYKC Circuit</div>
+      <div class="customer-chip"><span class="dot"></span>MUSASHI</div>
+      <div class="customer-chip"><span class="dot"></span>FUJITSU</div>
+      <div class="customer-chip"><span class="dot"></span>KDDI</div>
+      <div class="customer-chip"><span class="dot"></span>YOKOHAMA</div>
+      <div class="customer-chip"><span class="dot"></span>MINTH GROUP</div>
+      <div class="customer-chip"><span class="dot"></span>COMPAL</div>
+      <div class="customer-chip"><span class="dot"></span>DSSC</div>
+      <div class="customer-chip"><span class="dot"></span>Signcomplex</div>
+      <div class="customer-chip"><span class="dot"></span>LEDUX</div>
+      <div class="customer-chip"><span class="dot"></span>Midea</div>
+      <div class="customer-chip"><span class="dot"></span>GRIPM</div>
+      <div class="customer-chip"><span class="dot"></span>Asia Aroma</div>
+      <div class="customer-chip"><span class="dot"></span>FIRST</div>
+      <div class="customer-chip"><span class="dot"></span>THK Precision</div>
+      <div class="customer-chip"><span class="dot"></span>Gulfwell Tech</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="customers-grid fade-up" style="margin-top:40px">
+      <div class="customer-logo-card"><div class="name">SYKC Circuit</div></div>
+      <div class="customer-logo-card"><div class="name">MUSASHI</div></div>
+      <div class="customer-logo-card"><div class="name">FUJITSU</div></div>
+      <div class="customer-logo-card"><div class="name">KDDI</div></div>
+      <div class="customer-logo-card"><div class="name">YOKOHAMA</div></div>
+      <div class="customer-logo-card"><div class="name">MINTH GROUP</div></div>
+      <div class="customer-logo-card"><div class="name">COMPAL 仁寶</div></div>
+      <div class="customer-logo-card"><div class="name">DSSC</div></div>
+      <div class="customer-logo-card"><div class="name">Signcomplex</div></div>
+      <div class="customer-logo-card"><div class="name">LEDUX</div></div>
+      <div class="customer-logo-card"><div class="name">Midea 美的</div></div>
+      <div class="customer-logo-card"><div class="name">Asia Aroma 亚香</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="fade-up">
+        <div class="section-tag" style="background:var(--accent);color:var(--navy);margin-bottom:20px">
+          <span data-th>ติดต่อเรา</span>
+          <span data-en>Contact Us</span>
+          <span data-zh>联系我们</span>
+        </div>
+        <h2 class="contact-info" style="font-family:'Rajdhani',sans-serif;font-size:40px;font-weight:700;color:white;margin-bottom:20px;line-height:1.2">
+          <span data-th>พร้อมให้บริการ<br>ทุกความต้องการไอที</span>
+          <span data-en>Ready to Elevate<br>Your IT Infrastructure</span>
+          <span data-zh>随时准备为您提供<br>专业IT解决方案</span>
+        </h2>
+        <p style="color:rgba(255,255,255,0.55);font-size:15px;line-height:1.8;margin-bottom:32px">
+          <span data-th>ทีมผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและออกแบบโซลูชันที่ตรงกับความต้องการขององค์กรคุณ</span>
+          <span data-en>Our certified experts are ready to consult and design solutions tailored to your enterprise needs.</span>
+          <span data-zh>我们的认证专家团队随时为您提供咨询，设计适合您企业需求的解决方案。</span>
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">🏢</div>
+          <div>
+            <span data-th>Uway Information Technology (Thailand) Co., Ltd.</span>
+            <span data-en>Uway Information Technology (Thailand) Co., Ltd.</span>
+            <span data-zh>Uway信息技术（泰国）有限公司</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌍</div>
+          <div>Thailand Operations | 泰国 | ประเทศไทย</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>info@uway-th.com</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🔗</div>
+          <div>ISO/IEC 27001:2022 Certified</div>
+        </div>
+      </div>
+
+      <div class="contact-form fade-up" style="transition-delay:0.15s">
+        <div class="form-row">
+          <div class="form-group">
+            <label>
+              <span data-th>ชื่อ-นามสกุล</span>
+              <span data-en>Full Name</span>
+              <span data-zh>姓名</span>
+            </label>
+            <input type="text" placeholder="John Smith">
+          </div>
+          <div class="form-group">
+            <label>
+              <span data-th>อีเมล</span>
+              <span data-en>Email</span>
+              <span data-zh>邮箱</span>
+            </label>
+            <input type="email" placeholder="email@company.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span data-th>บริษัท</span>
+            <span data-en>Company</span>
+            <span data-zh>公司</span>
+          </label>
+          <input type="text" placeholder="Company Name">
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span data-th>บริการที่สนใจ</span>
+            <span data-en>Service Interest</span>
+            <span data-zh>感兴趣的服务</span>
+          </label>
+          <select>
+            <option value="">
+              <span data-th>เลือกบริการ</span>
+              <span data-en>Select service</span>
+              <span data-zh>请选择</span>
+            </option>
+            <option>Wireless Solution</option>
+            <option>Server Virtualization</option>
+            <option>Network Security</option>
+            <option>DMVPN</option>
+            <option>Cloud Solution</option>
+            <option>SD-WAN</option>
+            <option>System Integration</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span data-th>ข้อความ</span>
+            <span data-en>Message</span>
+            <span data-zh>留言</span>
+          </label>
+          <textarea placeholder="Tell us about your project..."></textarea>
+        </div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:16px">
+          <span data-th>ส่งข้อความ</span>
+          <span data-en>Send Message</span>
+          <span data-zh>发送消息</span>
+          ✉️
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 Uway Information Technology (Thailand) Co., Ltd. All rights reserved.</p>
+      <div class="footer-logo">U<span>way</span> IT Thailand</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Language switcher
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.textContent.trim().toLowerCase() === lang ||
+         (lang === 'th' && b.textContent.trim() === 'TH') ||
+         (lang === 'en' && b.textContent.trim() === 'EN') ||
+         (lang === 'zh' && b.textContent.trim() === '中文')) {
+        b.classList.add('active');
+      }
+    });
+  }
+
+  // Tabs
+  function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Initial lang render
+  setLang('th');
+</script>
+</body>
+</html>
