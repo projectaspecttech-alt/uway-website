@@ -1028,6 +1028,9 @@
     gap: 5px;
     cursor: pointer;
     padding: 4px;
+    background: none;
+    border: none;
+    z-index: 1100;
   }
 
   .hamburger span {
@@ -1039,20 +1042,104 @@
     transition: all 0.3s;
   }
 
+  /* Hamburger active (X) animation */
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(11,31,58,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid var(--primary);
+    z-index: 999;
+    padding: 16px 24px 24px;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .mobile-menu a:hover {
+    color: white;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .mobile-menu a:last-of-type {
+    border-bottom: none;
+  }
+
+  .mobile-lang {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 0 16px;
+  }
+
+  .mobile-lang .lang-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+  }
+
   @media (max-width: 900px) {
+    nav { padding: 0 20px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
 
+    /* Hide desktop lang switcher on mobile, show in mobile menu */
+    .nav-desktop-lang { display: none; }
+
     .hero-content {
       grid-template-columns: 1fr;
-      padding: 60px 30px;
-      gap: 40px;
+      padding: 48px 20px;
+      gap: 36px;
     }
 
-    .hero-title { font-size: 40px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 16px; }
+    .hero-desc { font-size: 14px; }
+
+    .hero-right {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .hero-stat-card { padding: 18px 14px; }
+    .stat-number { font-size: 28px; }
 
     .about-grid,
     .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+
+    .about-float-card {
+      position: relative;
+      bottom: auto; left: auto;
+      margin-top: 16px;
+    }
 
     .services-grid { grid-template-columns: 1fr; }
     .cert-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1060,8 +1147,57 @@
     .case-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
 
-    .container { padding: 0 24px; }
-    .section-title { font-size: 32px; }
+    .container { padding: 0 20px; }
+    section { padding: 64px 0; }
+
+    .section-title { font-size: 28px; }
+    .section-desc { font-size: 14px; }
+
+    .projects-tabs {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .tab-btn { flex: 1; text-align: center; padding: 10px 12px; font-size: 13px; }
+
+    .project-item {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    .project-num { font-size: 28px; }
+
+    .customers-marquee-wrap { margin: 0 -20px; }
+
+    /* Responsive Google Maps iframe */
+    .map-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .map-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 30px; }
+    .hero-right { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .vendors-grid { grid-template-columns: 1fr 1fr; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta .btn-primary,
+    .hero-cta .btn-outline { width: 100%; justify-content: center; }
   }
 
   /* Sticky nav active */
@@ -1209,6 +1345,26 @@
     filter: brightness(0) invert(1);
   }
 
+  /* ======= MAP ======= */
+  .map-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  .map-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+    border-radius: 12px;
+  }
+
 </style>
 </head>
 <body class="lang-en">
@@ -1261,16 +1417,60 @@
   </ul>
 
   <div style="display:flex;align-items:center;gap:20px;">
-    <div class="lang-switcher">
+    <div class="lang-switcher nav-desktop-lang">
       <button class="lang-btn" onclick="setLang('th')">TH</button>
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('zh')">中文</button>
     </div>
-    <div class="hamburger" id="hamburger">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">
+    <span data-th>เกี่ยวกับเรา</span>
+    <span data-en>About</span>
+    <span data-zh>关于我们</span>
+  </a>
+  <a href="#services" onclick="closeMobileMenu()">
+    <span data-th>บริการ</span>
+    <span data-en>Services</span>
+    <span data-zh>业务范围</span>
+  </a>
+  <a href="#projects" onclick="closeMobileMenu()">
+    <span data-th>ผลงาน</span>
+    <span data-en>Projects</span>
+    <span data-zh>项目案例</span>
+  </a>
+  <a href="#certifications" onclick="closeMobileMenu()">
+    <span data-th>ใบรับรอง</span>
+    <span data-en>Certifications</span>
+    <span data-zh>资质认证</span>
+  </a>
+  <a href="#customers" onclick="closeMobileMenu()">
+    <span data-th>ลูกค้า</span>
+    <span data-en>Customers</span>
+    <span data-zh>主要客户</span>
+  </a>
+  <a href="#vendors" onclick="closeMobileMenu()">
+    <span data-th>พันธมิตร</span>
+    <span data-en>Vendors</span>
+    <span data-zh>合作厂商</span>
+  </a>
+  <a href="#contact" onclick="closeMobileMenu()">
+    <span data-th>ติดต่อ</span>
+    <span data-en>Contact</span>
+    <span data-zh>联系我们</span>
+  </a>
+  <div class="mobile-lang">
+    <button class="lang-btn" onclick="setLang('th')">TH</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section id="hero">
@@ -2231,7 +2431,9 @@
           <div>Google Map</div>
       </div>
         <div class="contact-item">
+        <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.1054256777984!2d101.0590903!3d13.028957899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102c6b2b1cf562f%3A0x695a39f87e621208!2z4LmC4LiE4Lij4LiH4LiB4Liy4LijIOC4q-C5ieC4p-C4ouC4m-C4o-C4suC4muC5gOC4oeC4t-C4reC4h-C4l-C4reC4hzU!5e0!3m2!1sen!2sth!4v1780311750876!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
           </div>
             </div>
           </div>
@@ -2317,16 +2519,47 @@
   // Language switcher
   function setLang(lang) {
     document.body.className = 'lang-' + lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.lang-btn').forEach(b => {
-      if (b.textContent.trim().toLowerCase() === lang ||
-         (lang === 'th' && b.textContent.trim() === 'TH') ||
-         (lang === 'en' && b.textContent.trim() === 'EN') ||
-         (lang === 'zh' && b.textContent.trim() === '中文')) {
+      b.classList.remove('active');
+      if (
+        (lang === 'th' && b.textContent.trim() === 'TH') ||
+        (lang === 'en' && b.textContent.trim() === 'EN') ||
+        (lang === 'zh' && b.textContent.trim() === '中文')
+      ) {
         b.classList.add('active');
       }
     });
   }
+
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', function () {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', function(e) {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close mobile menu on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 900) {
+      closeMobileMenu();
+    }
+  });
 
   // Tabs
   function showTab(name) {
