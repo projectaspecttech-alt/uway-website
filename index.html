@@ -828,6 +828,18 @@
     font-weight: 700;
     color: var(--navy);
   }
+  .customer-logo-card img {
+  max-width: 100px;
+  max-height: 50px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: grayscale(100%);        
+  transition: filter 0.3s;
+}
+
+.customer-logo-card:hover img {
+  filter: grayscale(0%);          
+}
 
   /* ======= CONTACT / FOOTER ======= */
   #contact {
@@ -1823,7 +1835,11 @@
 
   <div class="container">
     <div class="customers-grid fade-up" style="margin-top:40px">
-      <div class="customer-logo-card"><div class="name">SYKC Circuit</div></div>
+      <div class="customer-logo-card">
+        <img src="assets/customers/SYKC.png" alt="SYKC Circuit">
+        <div class="name">SYKC Circuit
+        </div>
+      </div>
       <div class="customer-logo-card"><div class="name">MUSASHI</div></div>
       <div class="customer-logo-card"><div class="name">FUJITSU</div></div>
       <div class="customer-logo-card"><div class="name">KDDI</div></div>
