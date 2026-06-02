@@ -808,37 +808,43 @@
   }
 
   .customer-logo-card {
-    background: var(--light);
-    border: 1.5px solid var(--gray);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    transition: all 0.2s;
-  }
+  background: var(--light);
+  border: 1.5px solid var(--gray);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
 
-  .customer-logo-card:hover {
-    border-color: var(--primary);
-    background: white;
-    transform: scale(1.03);
-  }
+.customer-logo-card:hover {
+  border-color: var(--primary);
+  background: white;
+  transform: scale(1.03);
+}
 
-  .customer-logo-card .name {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-  .customer-logo-card img {
-  max-width: 100px;
-  max-height: 50px;
+.customer-logo-card .name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.customer-logo-card img {
+  max-width: 110px;
+  max-height: 55px;
   object-fit: contain;
   margin-bottom: 8px;
-  filter: grayscale(100%);        
+  filter: grayscale(100%);
   transition: filter 0.3s;
 }
 
 .customer-logo-card:hover img {
-  filter: grayscale(0%);          
+  filter: grayscale(0%);
 }
 
   /* ======= CONTACT / FOOTER ======= */
