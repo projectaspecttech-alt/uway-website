@@ -770,7 +770,7 @@
     to { transform: translateX(-50%); }
   }
 
-  .customer-chip {
+  /*.customer-chip {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -798,7 +798,44 @@
     height: 8px;
     background: var(--primary);
     border-radius: 50%;
-  }
+  }*/
+  .customer-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1.5px solid var(--gray);
+  border-radius: 10px;
+  padding: 10px 20px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  height: 70px;
+  min-width: 140px;
+}
+
+.customer-chip:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(21,101,192,0.1);
+}
+
+.customer-chip img {
+  max-width: 120px;
+  max-height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.customer-chip:hover img {
+  filter: grayscale(0%);
+}
+
+.customer-chip .chip-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+}
 
   .customers-grid {
     display: grid;
@@ -1802,42 +1839,52 @@
   </div>
 
   <div class="customers-marquee-wrap">
-    <div class="customers-marquee">
-      <div class="customer-chip"><span class="dot"></span>SYKC Circuit</div>
-      <div class="customer-chip"><span class="dot"></span>MUSASHI</div>
-      <div class="customer-chip"><span class="dot"></span>FUJITSU</div>
-      <div class="customer-chip"><span class="dot"></span>KDDI</div>
-      <div class="customer-chip"><span class="dot"></span>YOKOHAMA</div>
-      <div class="customer-chip"><span class="dot"></span>MINTH GROUP</div>
-      <div class="customer-chip"><span class="dot"></span>COMPAL</div>
-      <div class="customer-chip"><span class="dot"></span>DSSC</div>
-      <div class="customer-chip"><span class="dot"></span>Signcomplex</div>
-      <div class="customer-chip"><span class="dot"></span>LEDUX</div>
-      <div class="customer-chip"><span class="dot"></span>Midea</div>
-      <div class="customer-chip"><span class="dot"></span>GRIPM</div>
-      <div class="customer-chip"><span class="dot"></span>Asia Aroma</div>
-      <div class="customer-chip"><span class="dot"></span>FIRST</div>
-      <div class="customer-chip"><span class="dot"></span>THK Precision</div>
-      <div class="customer-chip"><span class="dot"></span>Gulfwell Tech</div>
-      <!-- duplicate for seamless -->
-      <div class="customer-chip"><span class="dot"></span>SYKC Circuit</div>
-      <div class="customer-chip"><span class="dot"></span>MUSASHI</div>
-      <div class="customer-chip"><span class="dot"></span>FUJITSU</div>
-      <div class="customer-chip"><span class="dot"></span>KDDI</div>
-      <div class="customer-chip"><span class="dot"></span>YOKOHAMA</div>
-      <div class="customer-chip"><span class="dot"></span>MINTH GROUP</div>
-      <div class="customer-chip"><span class="dot"></span>COMPAL</div>
-      <div class="customer-chip"><span class="dot"></span>DSSC</div>
-      <div class="customer-chip"><span class="dot"></span>Signcomplex</div>
-      <div class="customer-chip"><span class="dot"></span>LEDUX</div>
-      <div class="customer-chip"><span class="dot"></span>Midea</div>
-      <div class="customer-chip"><span class="dot"></span>GRIPM</div>
-      <div class="customer-chip"><span class="dot"></span>Asia Aroma</div>
-      <div class="customer-chip"><span class="dot"></span>FIRST</div>
-      <div class="customer-chip"><span class="dot"></span>THK Precision</div>
-      <div class="customer-chip"><span class="dot"></span>Gulfwell Tech</div>
+  <div class="customers-marquee">
+
+    <!-- มีรูป -->
+    <div class="customer-chip">
+      <img src="assets/Customers/SYKC-logo.jpg" alt="SYKC Circuit">
     </div>
+
+    <!-- ยังไม่มีรูป — แสดงชื่อแทน -->
+    <div class="customer-chip"><span class="chip-name">MUSASHI</span></div>
+    <div class="customer-chip"><span class="chip-name">FUJITSU</span></div>
+    <div class="customer-chip"><span class="chip-name">KDDI</span></div>
+    <div class="customer-chip"><span class="chip-name">YOKOHAMA</span></div>
+    <div class="customer-chip"><span class="chip-name">MINTH GROUP</span></div>
+    <div class="customer-chip"><span class="chip-name">COMPAL</span></div>
+    <div class="customer-chip"><span class="chip-name">DSSC</span></div>
+    <div class="customer-chip"><span class="chip-name">Signcomplex</span></div>
+    <div class="customer-chip"><span class="chip-name">LEDUX</span></div>
+    <div class="customer-chip"><span class="chip-name">Midea</span></div>
+    <div class="customer-chip"><span class="chip-name">GRIPM</span></div>
+    <div class="customer-chip"><span class="chip-name">Asia Aroma</span></div>
+    <div class="customer-chip"><span class="chip-name">FIRST</span></div>
+    <div class="customer-chip"><span class="chip-name">THK Precision</span></div>
+    <div class="customer-chip"><span class="chip-name">Gulfwell Tech</span></div>
+
+    <!-- duplicate for seamless loop -->
+    <div class="customer-chip">
+      <img src="assets/Customers/SYKC-logo.jpg" alt="SYKC Circuit">
+    </div>
+    <div class="customer-chip"><span class="chip-name">MUSASHI</span></div>
+    <div class="customer-chip"><span class="chip-name">FUJITSU</span></div>
+    <div class="customer-chip"><span class="chip-name">KDDI</span></div>
+    <div class="customer-chip"><span class="chip-name">YOKOHAMA</span></div>
+    <div class="customer-chip"><span class="chip-name">MINTH GROUP</span></div>
+    <div class="customer-chip"><span class="chip-name">COMPAL</span></div>
+    <div class="customer-chip"><span class="chip-name">DSSC</span></div>
+    <div class="customer-chip"><span class="chip-name">Signcomplex</span></div>
+    <div class="customer-chip"><span class="chip-name">LEDUX</span></div>
+    <div class="customer-chip"><span class="chip-name">Midea</span></div>
+    <div class="customer-chip"><span class="chip-name">GRIPM</span></div>
+    <div class="customer-chip"><span class="chip-name">Asia Aroma</span></div>
+    <div class="customer-chip"><span class="chip-name">FIRST</span></div>
+    <div class="customer-chip"><span class="chip-name">THK Precision</span></div>
+    <div class="customer-chip"><span class="chip-name">Gulfwell Tech</span></div>
+
   </div>
+</div>
 
   <div class="container">
     <div class="customers-grid fade-up" style="margin-top:40px">
