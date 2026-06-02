@@ -841,7 +841,7 @@
     margin-top: 40px;
   }
 @media (max-width: 900px) {
-  /* ... โค้ดเดิมอื่นๆ ใน media query ... */
+
   .customers-grid { grid-template-columns: repeat(2, 1fr); }
   .customer-logo-card {
   background: var(--light);
@@ -1109,6 +1109,21 @@
     .hamburger { display: flex; }
 
     /* Hide desktop lang switcher on mobile, show in mobile menu */
+    .mobile-lang {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 0 16px;
+  width: 100%; /* ให้กล่องคลุมเต็มความกว้าง */
+}
+
+.mobile-lang .lang-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px; /* เพิ่ม padding ให้ปุ่มใหญ่ขึ้น นิ้วกดง่าย */
+  font-size: 14px;
+  cursor: pointer;
+}
     .nav-desktop-lang { display: none; }
 
     .hero-content {
@@ -2516,33 +2531,44 @@
 <script>
   // Language switcher
   function setLang(lang) {
-    document.body.className = 'lang-' + lang;
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.remove('active');
-      if (
-        (lang === 'th' && b.textContent.trim() === 'TH') ||
-        (lang === 'en' && b.textContent.trim() === 'EN') ||
-        (lang === 'zh' && b.textContent.trim() === '中文')
-      ) {
-        b.classList.add('active');
-      }
-    });
-  }
-
-  // Hamburger menu toggle
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  hamburger.addEventListener('click', function () {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  // 1. เปลี่ยน Class ที่ body เพื่อเปิด-ปิดการแสดงผลภาษา [data-th], [data-en], [data-zh]
+  document.body.className = 'lang-' + lang;
+  
+  // 2. อัปเดตปุ่ม Active ทั้งหมดในหน้าจอ (รวมถึงบน Mobile)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    // ดึงค่าตัวอักษรข้างในปุ่มมาเช็ค เช่น 'TH', 'EN' หรือปุ่มเปลี่ยนภาษาจีน
+    const btnText = btn.textContent.trim().toLowerCase();
+    
+    if ((lang === 'th' && btnText === 'th') || 
+        (lang === 'en' && btnText === 'en') || 
+        (lang === 'zh' && (btnText === '中文' || btnText === 'zh'))) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
   });
 
-  function closeMobileMenu() {
+  // 3. (ทางเลือก) สั่งให้ปิดเมนูสไลด์หลังจากกดเปลี่ยนภาษาเสร็จแล้ว
+  closeMobileMenu();
+}
+
+  // Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+// ฟังก์ชันเปิด-ปิดเมนูเมื่อคลิกปุ่ม Hamburger
+hamburger.addEventListener('click', function() {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// แก้ไข/เพิ่ม ฟังก์ชันปิดเมนู Mobile ให้สมบูรณ์
+function closeMobileMenu() {
+  if (mobileMenu && hamburger) {
     mobileMenu.classList.remove('open');
     hamburger.classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // คืนค่าการ Scroll ของหน้าจอ
   }
 
   // Close mobile menu on outside click
