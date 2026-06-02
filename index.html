@@ -1144,6 +1144,9 @@
     .services-grid { grid-template-columns: 1fr; }
     .cert-grid { grid-template-columns: repeat(2, 1fr); }
     .customers-grid { grid-template-columns: repeat(2, 1fr); }
+    .customer-logo-card img { max-width: 100%; max-height: 80px; }
+    .customer-chip { width: 130px; height: 70px; padding: 8px 12px; }
+    .customer-chip img { width: 100px; height: 46px; }
     .case-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
 
@@ -1430,44 +1433,44 @@
 
 <!-- ===== MOBILE MENU ===== -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMobileMenu()">
+  <a href="#about" onclick="navTo(event,'#about')">
     <span data-th>เกี่ยวกับเรา</span>
     <span data-en>About</span>
     <span data-zh>关于我们</span>
   </a>
-  <a href="#services" onclick="closeMobileMenu()">
+  <a href="#services" onclick="navTo(event,'#services')">
     <span data-th>บริการ</span>
     <span data-en>Services</span>
     <span data-zh>业务范围</span>
   </a>
-  <a href="#projects" onclick="closeMobileMenu()">
+  <a href="#projects" onclick="navTo(event,'#projects')">
     <span data-th>ผลงาน</span>
     <span data-en>Projects</span>
     <span data-zh>项目案例</span>
   </a>
-  <a href="#certifications" onclick="closeMobileMenu()">
+  <a href="#certifications" onclick="navTo(event,'#certifications')">
     <span data-th>ใบรับรอง</span>
     <span data-en>Certifications</span>
     <span data-zh>资质认证</span>
   </a>
-  <a href="#customers" onclick="closeMobileMenu()">
+  <a href="#customers" onclick="navTo(event,'#customers')">
     <span data-th>ลูกค้า</span>
     <span data-en>Customers</span>
     <span data-zh>主要客户</span>
   </a>
-  <a href="#vendors" onclick="closeMobileMenu()">
+  <a href="#vendors" onclick="navTo(event,'#vendors')">
     <span data-th>พันธมิตร</span>
     <span data-en>Vendors</span>
     <span data-zh>合作厂商</span>
   </a>
-  <a href="#contact" onclick="closeMobileMenu()">
+  <a href="#contact" onclick="navTo(event,'#contact')">
     <span data-th>ติดต่อ</span>
     <span data-en>Contact</span>
     <span data-zh>联系我们</span>
   </a>
-  <div class="mobile-lang">
+  <div class="mobile-lang" id="mobileLangBar">
     <button class="lang-btn" onclick="setLang('th')">TH</button>
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
     <button class="lang-btn" onclick="setLang('zh')">中文</button>
   </div>
 </div>
@@ -2516,7 +2519,7 @@
 </section>
 
 <script>
-  // Language switcher
+  // Language switcher — syncs both desktop and mobile buttons
   function setLang(lang) {
     document.body.className = 'lang-' + lang;
     document.querySelectorAll('.lang-btn').forEach(b => {
@@ -2531,11 +2534,22 @@
     });
   }
 
+  // Navigate to anchor and close mobile menu after scroll starts
+  function navTo(e, selector) {
+    e.preventDefault();
+    closeMobileMenu();
+    setTimeout(function() {
+      var target = document.querySelector(selector);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
   // Hamburger menu toggle
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
 
-  hamburger.addEventListener('click', function () {
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation();
     const isOpen = mobileMenu.classList.toggle('open');
     hamburger.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -2549,7 +2563,9 @@
 
   // Close mobile menu on outside click
   document.addEventListener('click', function(e) {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    if (mobileMenu.classList.contains('open') &&
+        !hamburger.contains(e.target) &&
+        !mobileMenu.contains(e.target)) {
       closeMobileMenu();
     }
   });
