@@ -806,11 +806,12 @@
   background: white;
   border: 1.5px solid var(--gray);
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   white-space: nowrap;
   transition: all 0.2s;
-  height: 70px;
-  min-width: 140px;
+  height: 80px;
+  width: 160px;        /* กำหนดความกว้างคงที่ทุก chip */
+  flex-shrink: 0;      /* ไม่ให้ยุบตัว */
 }
 
 .customer-chip:hover {
@@ -819,10 +820,10 @@
 }
 
 .customer-chip img {
-  max-width: 240px;
-  max-height: 120px;
-  object-fit: contain;
-  filter: grayscale(0%);
+  width: 200px;        /* กำหนด width คงที่ */
+  height: 100px;        /* กำหนด height คงที่ */
+  object-fit: contain; /* ยืดหดตามสัดส่วนจริง ไม่บิด */
+  filter: grayscale(100%);
   transition: filter 0.3s;
 }
 
@@ -835,6 +836,7 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--navy);
+  text-align: center;
 }
 
   .customers-grid {
